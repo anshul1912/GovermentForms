@@ -1,0 +1,95 @@
+
+
+            body {
+                background-color: white !important;
+            }
+
+            .active{
+                opacity:1 !important;
+                color:white !important;
+                text-decoration:underline !important;
+            }
+
+            .identifier{
+                float: left;
+                padding: 10px;
+                font-size: 16px;
+
+            }
+
+            .inact{
+                opacity:0.5;
+                text-decoration:line-through;
+                color: red !important;
+            }
+
+            .chat_title i{
+                font-size: 25px;
+            }
+
+            .chat {
+                height: auto;
+                width: auto;
+                position: fixed;
+                bottom: 2px;
+                right: 5px;
+            }
+
+            .chat_container {
+                height: inherit;
+                width: 275px;
+                position: relative;
+                bottom: 0px;
+                display: inline-block;
+            }
+
+            .chat_title {
+                height: 45px;
+                border-style: solid;
+                border-width: 2px;
+                margin: 0;
+                color: rgb(255,255,255) !important;
+                background-color: rgb(75, 141, 248);
+                border-color: rgb(180, 206, 248);
+
+            }
+
+            .chat_controls{
+                padding: 10px;
+            }
+
+            .chat_message {
+		background-color: white;
+                height: 270px;
+                overflow: auto;
+                border-width: 0px 2px;
+                border-color: rgb(180, 206, 248);
+                border-style: solid;
+                margin-bottom: 40px;
+            }
+
+	    .chat_message > ul > li {
+		list-style: none;
+		margin-left: -30px;
+	    }
+
+            .chat_input {
+                border-style: solid;
+                border-width: 0px;
+                height: 40px;
+                width: 100%;
+                position: absolute;
+                bottom: 0px;
+            }
+
+            .chat_settings{
+                border-width: 0px 2px;
+                border-color: rgb(180, 206, 248);
+                border-style: solid;
+                text-align: center;
+                background-color: rgb(200,200,200);
+            }
+
+            .form-control{
+                padding-left: 3px;
+            }

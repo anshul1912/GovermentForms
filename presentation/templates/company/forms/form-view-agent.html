@@ -1,0 +1,110 @@
+{% extends "company/base.html" %}
+{% block title %}
+Agent Dashboard
+{% endblock %}
+{% block morelink %}
+<style type="text/css">
+  .spacer {
+    height: 15px;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+  <li class="">
+    <a href="/agent">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+
+    </a>
+  </li>
+  <li class="start">
+    <a href="#">
+    <i class="fa fa-wrench"></i>
+    <span class="title">
+      Profile
+    </span>
+    </a>
+  </li>
+  <li class="">
+    <a href="/agent/tickets">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Tickets
+    </span>
+
+    </a>
+  </li>
+  <li class="active">
+    <a href="/agent/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">Forms</span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+    </a>
+  </li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Form
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/agent">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="/agent/forms">Forms</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">{{ form[1] }}</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-list"></i>{{ form[1] }}
+              </div>
+            </div>
+            <div class="portlet-body">
+              {{ form[2]|safe }}
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+  </div>
+</div>
+{% endblock %}
+{% block morescript %}
+<script type="text/javascript">
+  // FIXME: this is wrong on so many levels D:
+  $(document).ready(function(){
+    $('form').append('<div class="spacer"></div>');
+    $('form').append('<input type="hidden" name="fid" value="{{ form[0] }}">');
+    $('form').append('{{ xsrf_form_html()|safe }}');
+    $('form').append('<button class="btn btn-primary" type="submit">Submit</button>');
+    $('form').attr('enctype', 'multipart/form-data');
+    $('form').attr('method', 'post');
+    $('form').attr('role', 'form');
+  });
+</script>
+{% endblock %}

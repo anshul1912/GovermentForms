@@ -1,0 +1,118 @@
+{% extends "company/base.html" %}
+{% block title %}
+Agent Dashboard
+{% endblock %}
+{% block sidenav %}
+	<li class="">
+		<a href="/agent">
+		<i class="fa fa-home"></i>
+		<span class="title">
+			Dashboard
+		</span>
+
+		</a>
+	</li>
+	<li class=" ">
+		<a href="/agent/profile">
+		<i class="fa fa-wrench"></i>
+		<span class="title">
+			Profile
+		</span>
+
+		</a>
+	</li>
+	<li class="start active">
+		<a href="/agent/tickets">
+		<i class="fa fa-envelope"></i>
+		<span class="title">
+			Tickets
+		</span>
+		<span class="selected">
+		</span>
+		<span class="open">
+		</span>
+		</a>
+	</li>
+	<!--
+	<li class="">
+		<a href="/agent/forms">
+		<i class="fa fa-envelope"></i>
+		<span class="title">Forms</span>
+
+		</a>
+	</li>
+	-->
+{% endblock %}
+
+{% block content %}
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+					<h3 class="page-title">
+					Ticket
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/agent">Home</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/agent/tickets">Tickets</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="#">Ticket</a>
+						</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN SAMPLE TABLE PORTLET-->
+					<div class="portlet">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-bell-o"></i>Add Ticket
+							</div>
+						</div>
+						<div class="portlet-body">
+							<div class="post-comment">
+								<form role="form" method="post">
+									<div class="form-group">
+										<label >Title</label>
+										<input type="text" class="form-control"
+										value=""
+										placeholder="Enter title"
+										name="t_title">
+									</div>
+									<div class="form-group">
+										<label class="control-label">Description
+										</label>
+										<textarea name="description" class="col-md-10 form-control" rows="5"></textarea>
+										<p>&nbsp;</p>
+										<select name="status"class="col-md-6 form-control">
+											<option value="open">Open Ticket</option>
+											<option value="hold">Hold Ticket</option>
+											<option value="close">Close Ticket</option>
+											<option value="re-open">Re-Open Ticket</option>
+										</select>
+									</div>
+									{{ xsrf_form_html()|safe }}
+									<button class="margin-top-20 btn blue" type="submit" style="float:right">Open ticket</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- END SAMPLE TABLE PORTLET-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+		</div>
+	</div>
+{% endblock %}

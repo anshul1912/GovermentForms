@@ -1,0 +1,126 @@
+{% extends "company/base.html" %}
+{% block title %}
+Agent Dashboard
+{% endblock %}
+{% block addmore %}
+{% endblock %}
+{% block morelink %}
+<style type="text/css">
+  .deletebtn {
+    background-color: transparent; color: #0D638F; border: none; cursor: pointer;
+  }
+
+  .deletebtn:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+  <li class="">
+    <a href="/agent">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+
+    </a>
+  </li>
+  <li class="start">
+    <a href="/agent/profile">
+    <i class="fa fa-wrench"></i>
+    <span class="title">
+      Profile
+    </span>
+    </a>
+  </li>
+  <li class="">
+    <a href="/agent/tickets">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Tickets
+    </span>
+
+    </a>
+  </li>
+  <li class="active">
+    <a href="#">
+    <i class="fa fa-envelope"></i>
+    <span class="title">Forms</span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+    </a>
+  </li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Forms
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/agent">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Forms</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-edit"></i>Form List
+            </div>
+          </div>
+          <div class="portlet-body">
+            <table class="table table-striped table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Form Name
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for form in forms %}
+                <tr>
+                  <td>
+                    <a href="/agent/forms/view?form={{ form[0] }}">{{ form[1] }}</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+              <!--
+              <button type="button" class="btn btn-sm" style="float:left">Previous</button>
+              <button type="button" class="btn btn-sm" style="float:right">Next</button>
+              <br>
+              <br>
+              <br>
+            -->
+          </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block morejs %}
+{% endblock %}

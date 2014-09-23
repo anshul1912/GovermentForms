@@ -1,0 +1,178 @@
+{% extends "company/base.html" %}
+{% block morelink %}
+<style type="text/css">
+  .spacer {
+    height: 15px;
+  }
+</style>
+{% endblock %}
+{% block title %}
+  Form Viewer
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/customer">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Live Support
+    </span>
+
+  </a>
+</li>
+<li class=" ">
+  <a href="/customer/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="/customer/tickets">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/customer/solved">
+    <i class="fa fa-flag"></i>
+    <span class="title">
+      Resolved
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Forms
+    </span>
+  </a>
+</li>
+{% endblock %}
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Profile
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/customer">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="/customer/tickets">Tickets</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="/customer/tickets/view?ticket={{ form_data[2] }}">Ticket #{{ form_data[2] }}</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Form viewer</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-list"></i>Form Viewer
+              </div>
+              {% if c_logo != None %}
+              <div class="pull-right"><img src="/uploads/{{ c_logo }}" style="max-height:42px; width: auto"></div>
+              {% endif %}
+            </div>
+            <div class="portlet-body">
+            	<div class="row">
+            		<div class="col-md-10">
+		            	<form class="form-horizontal" role="form">
+		            		{{ form_data[1]|safe }}
+		            	</form>
+	            	</div>
+					      <div class="col-md-2" style="overflow: hidden">
+					      	{% for i in attachments %}
+					      		{% if 'image' in i[2] %}
+					      		<a href="/uploads/{{ i[1] }}" target="_blank"><img class="img-responsive" src="/uploads/{{ i[1] }}"></a>
+					          {% else %}
+					          <a class="label label-default" href="/uploads/{{ i[1] }}" target="_blank">{{ i[0] }}</a>
+					          {% endif %}
+					          <div class="spacer"></div>
+					        {% endfor %}
+					      </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block morescript %}
+<script type="text/javascript">
+	function dosomething(ser) {
+  // ser = $("form").serialize();
+    $.each(ser.split('&'), function (i, el) {
+      var vals = el.split('=');
+      var form = $("form");
+      var temp = form.find("[name='" + vals[0] + "']");
+
+      if (temp.length > 0) {
+        fel = temp[0];
+      };
+
+      fel_value = decodeURIComponent(vals[1]);
+      var type = "";
+      var tag = "";
+
+      tag = fel.tagName.toLowerCase();
+
+      if (tag == "textarea") {
+        fel.value = fel_value;
+      }
+      else if (tag == "select") {
+        form.find("[value='" + fel_value + "']")[0].selected = "selected";
+      }
+      else if (tag == "input") {
+
+        type = $(fel).attr("type");
+
+        if (type == "text" || type == "password" || type == "hidden") {
+          fel.value = fel_value;
+        }
+        else if (type == "checkbox") {
+          form.find("[value='" + fel_value + "']")[0].checked = true;
+        }
+        else if (type == "radio") {
+         form.find("[value='" + fel_value + "']")[0].checked = true;
+       }
+     }
+    });
+  }
+
+  $(document).ready(function(){
+    $('form').append('<div class="spacer"></div>');
+    dosomething('{{ form_data[0]|safe }}');
+
+    $('form').children().attr('disabled', true);
+  });
+</script>
+{% endblock %}

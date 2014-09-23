@@ -1,0 +1,132 @@
+{% extends "company/base.html" %}
+{% block title %}
+Customer Dashboard
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/customer">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Live Support
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="#">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/customer/tickets">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/solved">
+    <i class="fa fa-flag"></i>
+    <span class="title">
+      Resolved
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Forms
+    </span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Profile
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/customer">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Profile</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-reorder"></i> Profile
+            </div>
+          </div>
+          <div class="portlet-body form">
+            <form role="form" method="post">
+              <div class="form-body">
+                <div class="form-group">
+                  <label >User Id</label>
+                  <input type="text" class="form-control"
+                  value="{{ name.get('email') }}"
+                  disabled
+                  name="email">
+                </div>
+                <div class="form-group">
+                  <label >Name</label>
+                  <input type="text" class="form-control"
+                  value="{{ name.get('name') }}"
+                  name="customer"
+                  placeholder="Enter Name">
+                </div>
+                <div class="form-group">
+                  <label>Password</label>
+                  <input type="password" class="form-control"
+                  name="password"
+                  placeholder="Enter New Password">
+                </div>
+                  <!--
+                  <div class="form-group">
+                    <label class="">Are you a Legal Advisor??</label>
+                    <div class="checkbox-list">
+                      <input type="checkbox" name="vehicle" value="Bike">Yes
+                    </div>
+                  </div>
+                -->
+              </div>
+              <div class="form-actions">
+                {{ xsrf_form_html()|safe }}
+                <button type="submit" class="btn blue">Update</button>
+                <button type="button" class="btn default" onclick="window.location.href='/customer';">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "company/base.html" %}
+{% block morelink %}
+<style type="text/css">
+  .spacer {
+    height: 15px;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+<li class="start">
+  <a href="/company">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/company/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/company/departments">
+    <i class="fa fa-leaf"></i>
+    <span class="title">
+      Departments
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/company/agents">
+    <i class="fa fa-folder-open"></i>
+    <span class="title">
+      Agents
+    </span>
+  </a>
+</li>
+<li class="active">
+  <a href="/company/forms">
+    <i class="fa fa-table"></i>
+    <span class="title">
+      Forms
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/company/packages">
+    <i class="fa fa-download"></i>
+    <span class="title">
+      Packages
+    </span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Form
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/company">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="/company/forms">Forms</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">{{ form[1] }}</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-title">
+              <div class="caption">
+                <i class="fa fa-list"></i>{{ form[1] }} [{{ form[4] }}]
+              </div>
+            </div>
+            <div class="portlet-body">
+              {{ form[2]|safe }}
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+  </div>
+</div>
+{% endblock %}

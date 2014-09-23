@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block addmore %}
+  <link rel="stylesheet" type="text/css" href="/static/select2-3.4.8/select2.css">
+{% endblock %}
+
+{% block userpanel %}
+
+{% if name.get('name') %} {# this checks whether the user is signed in #}
+<li>
+  <button class="btn green" style="margin-top:10px;" onclick="location.href='/'">Dashboard</button>
+</li>
+<li>
+  <button class="btn blue" style="margin-top:10px;" onclick="location.href='/auth/logout'">Sign out</button>
+</li>
+{% else %}
+<li>
+  <button class="btn green" data-toggle="modal" data-target="#myModal" style="margin-top:10px;">Sign in</button>
+</li>
+<li>
+  <button class="btn blue" data-toggle="modal" data-target="#myModal2" style="margin-top:10px;">Sign up</button>
+</li>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+<style type="text/css">
+  #s2id_search_box
+  {
+    border:none;
+  }
+</style>
+<ul id="flist">
+  <div style="height:20px;"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        {% for item in fdata %}
+          <div class="row">
+            <div class="col-md-12 col-sm-12">
+              <h2><a href="/public/{{ item[5] }}">{{ item[0] }} - {{ item[2] }}</a></h2>
+              <h4>{{ item[1] }}</h4>
+               <ul class="blog-info">
+                <li><i class="fa fa-tags"></i> Ticket logged by : {{ item[3] }}</li>
+                <li><i class="fa fa-calendar"></i> Tickets logged on : {{ item[4] }}</li>
+              </ul>
+           </div>
+         </div>
+       {% endfor %}
+      </div>
+      <!-- n<div style="padding-top:1%;"></div> -->
+      <div class="col-md-4" style="position:absolute; right:0%; padding-top:1%;">
+        <div class="div_search_box">
+          <div class="input-group">
+            <input type="hidden" id="search_box" class="form-control"/>
+            <span class="input-group-btn">
+              <button class="btn btn-success" type="button" id="search_button" style="margin-right:12px;"> Search </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ul>
+<br>
+<hr>
+
+<div class="container">
+  <button type="button" data-loading-text="Please Wait......" class="btn btn-danger btn-block btn-lg" id="loadmore" data-ts="{{ fdata[-1][4] }}" autocomplete="off" style="border-radius: 12px !important; background-color:#5F9EA0;color:#000;"> LOAD MORE </button>
+</div>
+
+<div style="height:20px;"></div>
+{% endblock %}
+
+{% block pricing %}
+{% endblock %}
+
+{% block morejs %}
+<script type="text/javascript" src="/static/select2-3.4.8/select2.min.js"></script>
+<script type="text/javascript" src="/static/js/custom_script.js"></script>
+{% endblock %}

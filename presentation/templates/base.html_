@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}
+    <meta name="description" content="Chillpublic -- Relax, Stop Running...">
+    {% endblock %}
+
+    <title>
+      {% block title %}
+        Chillpublic -- Relax, Stop Running ...
+      {% endblock %}
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    {% block morehead %}
+    <style type="text/css">
+      label {
+        display: none;
+      }
+    </style>
+    {% endblock %}
+  </head>
+
+  <body>
+    <!--[if lt IE 10]>
+      <p style="text-align:center;background:yellow;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/"><strong>upgrade your browser</strong></a> or <a href="http://www.google.com/chromeframe/?redirect=true"><strong>activate Google Chrome Frame</strong></a> to improve your experience.</p>
+    <![endif]-->
+    {% block main %}
+    <div class="container">
+      <div style="margin-top: 60px;text-align: center;">
+        <h1>Welcome to Chillpublic :D</h1>
+        {% if name.get("name", None) %}
+        <p class="lead">
+          {{ name.get("name") }}<br>
+          <a href="/auth/logout">Logout</a>
+        </p>
+        <hr>
+        <p>{{ name }}</p>
+        {% else %}
+        <div class="row" style="margin-top: 40px; margin-left: auto; margin-right: auto; max-width: 600px;">
+          <div class="col-md-6">
+            <form id="cp_form" role="form" method="POST" action="/auth/login" style="text-align: left">
+              {{ xsrf_form_html()|safe }}
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input name="email" type="email" class="form-control" id="email" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+              </div>
+              <div class="form-group">
+                <div class="btn-group u_type" data-toggle="buttons" style="display:none">
+                  <label class="btn btn-primary">
+                    <input type="radio" value="Company" name="c_type" id="option1">Company
+                  </label>
+                  <label class="btn btn-primary">
+                    <input type="radio" value="Agent" name="c_type" id="option1">Agent
+                  </label>
+                  <label class="btn btn-primary active">
+                    <input checked value="Customer" type="radio" name="c_type" id="option2">Customer
+                  </label>
+                </div>
+                  <div class="u_type" style="height:5px;display:none"></div>
+                <button type="submit" id="signin" class="btn btn-primary">Sign in</button><span> or <a id="form-toggle" href="#">Sign up</a></span>
+              </div>
+            </form>
+          </div>
+          <div class="col-md-6">
+            <p class="lead">
+              <a href="/auth/facebook">Sign in with Facebook</a><br>
+              <a href="/auth/google">Sign in with Google</a><br>
+              <a href="/auth/twitter">Sign in with Twitter</a><br>
+            </p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div><!-- /.container -->
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block tail %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    {% endblock %}
+    {% block moretail %}
+    <script type="text/javascript">
+      $('#form-toggle').on('click', function(e){
+        e.preventDefault();
+
+        if ($('#form-toggle').text() == 'Sign up') {
+          $('.u_type').toggle(true);
+          $('#form-toggle').text('Cancel');
+          $('#signin').text('Sign up');
+          $('#cp_form').attr('action', '/auth/signup');
+          $('#email').focus();
+        } else if ($('#form-toggle').text() == 'Cancel') {
+          $('.u_type').toggle(false);
+          $('#form-toggle').text('Sign up');
+          $('#signin').text('Sign in');
+          $('#cp_form').attr('action', '/auth/login');
+          $('#email').focus();
+        }
+      });
+
+      $(document).ready(function(){
+        $('#email').focus();
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>

@@ -1,0 +1,464 @@
+{% extends "company/base.html" %}
+{% block title %}
+Customer Dashboard
+{% endblock %}
+{% block morelink %}
+<style type="text/css">
+  .spacer {
+    height: 10px;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+<li {% if ticket[7] == 'live' %}
+      class="start active"
+    {% endif %}
+    >
+  <a href="/customer">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Live Support
+    </span>
+    {% if ticket[7] == 'live' %}
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+    {% endif %}
+  </a>
+</li>
+<li class=" ">
+  <a href="/customer/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li {% if ticket[7] != 'live' %}
+    class="start active"
+    {% endif %}
+    >
+  <a href="/customer/tickets">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+    {% if ticket[7] != 'live' %}
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+    {% endif %}
+  </a>
+</li>
+<li class="">
+  <a href="/customer/solved">
+    <i class="fa fa-flag"></i>
+    <span class="title">
+      Resolved
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Forms
+    </span>
+  </a>
+</li>
+
+<!-- Modal -->
+<div class="modal fade" id="publicModal" tabindex="-1" role="dialog" aria-labelledby="publicModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="publicModalLabel">Go for public support</h4>
+      </div>
+      <form method="post" role="form">
+        <div class="modal-body">
+          <fieldset>
+            <legend class="sr-only">Public support</legend>
+            <div class="form-group">
+              <label>Message</label>
+              <textarea class="form-control" id="p_message" name="p_message" placeholder="Enter your message to the public forum" required rows="3"></textarea>
+            </div>
+          </fieldset>
+          <p><em><span class="text-danger"><strong>Warning:</strong></span> This will open your ticket's content on the public forum for support.</em></p>
+          <p>Are you sure you wish to proceed?</p>
+        </div>
+        <div class="modal-footer">
+          {{ xsrf_form_html()|safe }}
+          <input type="hidden" value="{{ ticket[0] }}" name="tid">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" onclick="
+		  if ($('#p_message').val().length > 0) {
+		    $(this).addClass('disabled');$(this).text('Please wait ...');
+	          } else {
+		    return false;
+		  }
+		  " type="submit">Accept</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% if ticket[7] == 'live' %}
+<div class="modal fade" data-backdrop='static' id="agentwaitmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!--
+      <div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      -->
+      <div class="modal-body">
+	<span class="text-info">Please wait while an agent connects to you <img src="/static/img/301.gif"></span>
+      </div>
+      <!--
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+      -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+        {% if ticket[7] == 'live' %}
+          Live Support
+        {% else %}
+          Ticket
+        {% endif %}
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/customer">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          {% if ticket[7] != 'live' %}
+          <li>
+            <a href="/customer/tickets">Tickets</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Ticket
+              [id: {{ ticket[0] }} / time opened: {{ ticket[6].strftime("%Y-%m-%d %H:%M:%S") }}]
+            </a>
+          </li>
+          {% else %}
+          <li>
+            <a href="#">Live Support</a>
+          </li>
+          {% endif %}
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet">
+          <div class="portlet-title">
+            {% if ticket[7] != 'live' %}
+            <div class="caption">
+              <i class="fa fa-ticket"></i>View Ticket
+            </div>
+            {% endif %}
+          </div>
+          <div class="portlet-body">
+            <div class="post-comment">
+              <form role="form">
+                <div class="form-group">
+                  <label >Title</label>
+                  <input type="text" class="form-control"
+                  value="{{ ticket[1] }}"
+                  placeholder="Enter title"
+                  name="t_title"
+                  disabled>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Description
+                  </label>
+                  <textarea disabled name="description" class="col-md-10 form-control" rows="5">{{ ticket[2] }}</textarea>
+                </div>
+                <div class="form-group">
+                {% if attachment %}
+                  <label class="control-label">Attachment(s): </label>
+                  {% for i in attachment %}
+                    <a class="label label-default" href="/uploads/{{ i[1] }}" target="_blank">{{ i[0] }}</a>
+                  {% endfor %}
+                {% endif %}
+                {% if form_data %}
+                <br><label class="control-label">Form available: </label>
+                <a class="label label-default" id="formlink" href="/customer/tickets/view?ticket={{ ticket[0] }}&amp;form={{ form_data }}">{{ ticket[1] }}</a>
+                {% endif %}
+                </div>
+                {#
+                  <!-- {{ xsrf_form_html()|safe }}
+                  <button class="margin-top-20 btn blue" type="submit" style="float:right">Open ticket</button> -->
+                #}
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- END SAMPLE TABLE PORTLET-->
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="comment_div" style="max-height:150px; overflow:auto">
+          <ul id="comment_list">
+            {% for comment in thread %}
+            <li>
+              {{ comment[0] }} -- by {{ comment[2] }}
+              {% if comment[1] %}
+              ({{ comment[1] }})
+              {% endif %}
+              on {{ comment[3].strftime("%Y-%m-%d %H:%M:%S") }}
+              {% if attachment %}
+                {% for i in attachment %}
+                  {% if comment[4] == i[2] %}
+                  with <a href="/uploads/{{ i[1] }}" target="_blank">{{ i[0] }}</a>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          </div>
+        </div>
+      </div>
+      {% if ticket[7] != 'close' %}
+      <div class="row">
+        <div class="col-md-12">
+          <form role="form" method="post" id="ticketform" enctype="multipart/form-data">
+            <div class="form-group">
+              <label id="agentwait" class="control-label">
+              {% if ticket[7] == 'live' %}
+	      <!-- <span class="text-info">Please wait while an agent connects to you <img src="/static/img/301.gif"></span> -->
+              {% else %}
+              Comment
+              {% endif %}
+              </label>
+              {% if ticket[7] == 'live' %}
+              <div class="input-group">
+                <input type="text" class="form-control" disabled="true" id="comment" name="comment" placeholder="Enter text" required="true">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </span>
+              </div><!-- /input-group -->
+              {% else %}
+              <textarea class="col-md-10 form-control" id="comment" name="comment" required="true" rows="2"></textarea>
+              {% endif %}
+            </div>
+            <div class="spacer"></div>
+            {% if ticket[7] != 'live' %}
+            <div class="form-group">
+              <label >Attach a file</label>
+              <input name="upload" id="upload" type="file">
+            </div>
+            {% endif %}
+            <input type="hidden" value="{{ ticket[0] }}" name="tid">
+            <input type="hidden" value="append" name="state">
+            {{ xsrf_form_html()|safe }}
+            {% if ticket[7] == 'live' %}
+            <div class="btn-group pull-right margin-top-20 ">
+              <!-- <button class="btn blue" type="submit">Send</button> -->
+              <span class="btn btn-default" id="ot" style="display: none">Open Ticket</span>
+            </div>
+            {% else %}
+            <button class="margin-top-20 btn green pull-right" id="publicbtn" type="button" data-toggle="modal" data-target="#publicModal">Public support</button>
+            <button class="margin-top-20 btn blue pull-right" type="submit">
+              Add comment
+            </button>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+      {% else %}
+      <div class="spacer"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <form method="post" role="form">
+            <div class="form-group pull-right">
+              <div class="input-group">
+                <label>Were you satisfied with the service you received?&nbsp;&nbsp;</label>
+                <button class="btn green" type="button"><i class="fa fa-thumbs-o-up"></i> Praise</button>
+                <button class="btn red" type="button">Re-open ticket <i class="fa fa-thumbs-o-down"></i></button>
+                {{ xsrf_form_html()|safe }}
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+      <!-- END PAGE HEADER-->
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block morescript %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    var objDiv = document.getElementById("comment_div");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+    $('#comment').focus();
+  });
+
+  {% if ticket[7] == 'live' %}
+  var ws;
+  var agent_timer = true;
+  $('#agentwaitmodal').modal('show');
+
+  function wsconnect() {
+
+    var ws_proto;
+    if (location.protocol == 'https:') {
+      ws_proto = 'wss';
+    } else {
+      ws_proto = 'ws';
+    }
+
+    ws = new WebSocket(
+      ws_proto +
+      "://" +
+      location.href.split('/')[2] +
+      "/wsticket/{{ ticket[0] }}"
+    );
+
+    ws.onopen = function (evt) {
+      setTimeout(function() {
+        if (agent_timer == true) {
+          alert('It appears no agent is available at the moment. Click OK to open an offline ticket.');
+          $('#ot').click();
+        }
+      }, 600000);
+    }
+
+    ws.onmessage = function (evt) {
+      $('#agentwait').remove();
+      $('#agentwaitmodal').modal('hide');
+      $('#comment_list').append('<li>' + evt.data  + '</li>');
+      var objDiv = document.getElementById("comment_div");
+      objDiv.scrollTop = objDiv.scrollHeight;
+      $('#comment').attr('disabled', false);
+      agent_timer = false;
+
+      if (evt.data.search('has left chat') > -1) {
+        //alert('The chat session has ended, click OK to continue.');
+        setTimeout(function() {
+        	location.reload();
+        }, 10000);
+        //$('#ot').click();
+      }
+    }
+
+    ws.onclose = function (evt) {
+      wsconnect();
+    }
+
+  }
+
+  $(document).ready(function(e){
+    wsconnect();
+  });
+
+  $('#ot').on('click', function(e){
+    e.preventDefault();
+
+    $('#ot').addClass('disabled');
+    $('#ot').text('Please wait ...');
+
+    $.post(location.href, {
+      state: 'open',
+      ticket: '{{ ticket[0] }}',
+      _xsrf: '{{ xsrf_token }}'
+    }).done(function(e) {
+      location.reload();
+    }).fail(function(e){
+      toastr['error']('The ticket state could not be changed! Please try again.');
+      $('#ot').removeClass('disabled');
+      $('#ot').text('Open Ticket');
+    });
+  });
+
+  $('#ticketform').on('submit', function(e){
+    e.preventDefault();
+
+    if (!$('#comment').val().length > 0) {
+      return;
+    }
+
+    // $('#comment').attr('disabled', true);
+
+    $.post(location.href,
+      $('#ticketform').serialize()
+    ).done(function(d) {
+      ws.send($('#comment').val());
+      $('#comment_list').append('<li>You: ' + $('#comment').val() + '</li>');
+      var objDiv = document.getElementById("comment_div");
+      objDiv.scrollTop = objDiv.scrollHeight;
+      $('#comment').attr('disabled', false);
+      $('#comment').val('');
+    }).fail(function(f) {
+      toastr['error']('There was an error with posting your comment.');
+      $('#comment').focus();
+    });
+
+  });
+  {% endif %}
+
+  {% if ticket[7] == 'close' %}
+  $('form').on('submit', function(e){
+    e.preventDefault();
+  });
+
+  function postFeedback(feedback) {
+    $.post('/customer/solved', {
+      tid: '{{ ticket[0] }}',
+      _xsrf: '{{ xsrf_token }}',
+      action: feedback
+    }).done(function(e){
+      location.reload();
+    }).fail(function(e){
+      location.reload();
+    });
+  }
+
+  $('.btn').on('click', function(e){
+    e.preventDefault();
+
+    if ($(this).text().trim() == 'Praise') {
+      $(this).text('Please wait ...');
+      $('.btn').addClass('disabled');
+      postFeedback('praise');
+    } else if ($(this).text().trim() == 'Re-open ticket') {
+      $(this).text('Please wait ...');
+      $('.btn').addClass('disabled');
+      postFeedback('re-open');
+    }
+  });
+  {% endif %}
+</script>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends "company/base.html" %}
+{% block title %}
+Customer Dashboard
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/customer">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Live Support
+    </span>
+
+  </a>
+</li>
+<li class=" ">
+  <a href="/customer/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="#">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/customer/solved">
+    <i class="fa fa-flag"></i>
+    <span class="title">
+      Resolved
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Forms
+    </span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Tickets
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/customer">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Tickets</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-reorder"></i>Ticket List
+            </div>
+          </div>
+          <div class="portlet-body">
+            <table class="editableTable table table-bordered table-striped" border="1" cellpadding="5" cellspacing="5">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Title</th>
+                  <th>Time Opened</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for ticket in tickets %}
+                <tr>
+                  <td>
+                    {{ ticket[0] }}
+                  </td>
+                  <td>
+                    <a href="tickets/view?ticket={{ ticket[0] }}">{{ ticket[1] }}</a>
+                  </td>
+                  <td>
+                    {{ ticket[2].strftime("%Y-%m-%d %H:%M:%S") }}
+                  </td>
+                  <td>
+                    {{ ticket[3] }}
+                  </td>
+                </tr>
+                {% endfor %}
+                  <!--
+                  <tr>
+                    <td class="highlight">
+                      <a href="#">101</a>
+                    </td>
+                    <td>
+                      ABC
+                    </td>
+                    <td>
+                      2:30
+                    </td>
+                    <td>
+                      X
+                    </td>
+                    <td>
+                      Kunal
+                    </td>
+                  </tr>
+                -->
+              </tbody>
+            </table>
+              <!--
+              <button type="button" class="btn btn-sm" style="float:left">Previous</button>
+              <button type="button" class="btn btn-sm" style="float:right">Next</button>
+              <br>
+              <br>
+              <br>
+            -->
+            <div style="float:right" onclick="window.location.href='/customer';">
+              <button type="button" class="btn btn blue">Add Ticket</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+  </div>
+</div>
+{% endblock %}

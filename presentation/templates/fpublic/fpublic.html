@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block userpanel %}
+
+{% if name.get('name') %} {# this checks whether the user is signed in #}
+<li>
+  <button class="btn green" style="margin-top:10px;" onclick="location.href='/'">Dashboard</button>
+</li>
+<li>
+  <button class="btn blue" style="margin-top:10px;" onclick="location.href='/auth/logout'">Sign out</button>
+</li>
+{% else %}
+<li>
+  <button class="btn green" data-toggle="modal" data-target="#myModal" style="margin-top:10px;">Sign in</button>
+</li>
+<li>
+  <button class="btn blue" data-toggle="modal" data-target="#myModal2" style="margin-top:10px;">Sign up</button>
+</li>
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+	<div class="container">
+		<div class="row">
+
+			<div class="box" style="border: 1px black solid;padding:1px">
+
+	            <div style="background-color:#3C6EB4;height: 30px;line-height: 30px;color:white;font-size:13px;font-weight: bold;padding-left: 11px;text-decoration: underline;">
+	            	{{ fdata[0] }}
+	            </div>
+
+	            <div style="margin:10px;">
+		            <img src="{{ fdata[5] }}"> <span style="font-weight: bold;">
+		            {{ fdata[4] }}</span> says:  <span style="float:right;margin-right:10px;line-height: 25px;font-weight: bold;">{{ fdata[3] }}</span>
+	            </div>
+
+	            <div class="note note-info" style="margin-left:35px;">
+	            	<span style="font-weight:bold;font-size:20px">"</span><em>{{ fdata[2] }}</em><span style="font-weight:bold;font-size:20px">"</span>
+	            </div>
+
+	            <div style="padding-left:11px">
+	                earlier on <span style="font-weight:bold;">{{ fdata[6] }} , {{ fdata[4] }}</span> posted the following ticket :
+	            </div>
+
+	            <div style="padding-left:11px">
+	                {{ fdata[1] }}
+	            </div>
+
+	        </div>
+
+		</div>
+
+		<div class="row">
+			<div id="disqus_thread"></div>
+		</div>
+	</div>
+</div>
+
+
+
+
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'chillpublic'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+{% endblock %}
+
+{% block pricing %}
+
+{% endblock %}

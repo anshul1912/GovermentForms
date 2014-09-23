@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block addmore%}
+    <link href="../static/metronic-admin/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="../static/metronic-admin/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/css/style.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/css/themes/default.css" rel="stylesheet" type="text/css" id="style_color"/>
+    <link href="../static/metronic-admin/css/pages/pricing-tables.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/metronic-admin/css/custom.css" rel="stylesheet" type="text/css"/>
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico"/>
+{% endblock %}
+
+{% block content %}
+    <!-- BEGIN CONTAINER -->
+   <div class="page-content" style="margin-left:0px;margin-top: -80px;">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row">
+            <!-- BEGIN INLINE NOTIFICATIONS PORTLET-->
+            <div class="container">
+            	<div class="portlet">
+                    <div class="portlet-title" style="margin-top: 50px;">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Available Packages
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="row margin-bottom-40" style="text-aligh:centre">
+                            <!-- Pricing -->
+                        	<div class="col-md-3">
+                                <div class="pricing hover-effect">
+                                    <div class="pricing-head">
+                                        <h3>Startup</h3>
+                                        <h4><i>&#8377; 6000</i><span>Per Agent</span></h4>
+                                    </div>
+                                    <ul class="pricing-content list-unstyled">
+                                        <li><i class="fa fa-tags"></i> 1-10 Agents</li>
+                                        <li><i class="fa fa-star"></i> Unlimited Departments</li>
+                                        <li><i class="fa fa-star"></i> 1:3 Communication</li>
+                                        <li><i class="fa fa-star"></i> Live Tracking and Monitoring</li>
+                                        <li><i class="fa fa-star"></i> Brand Value</li>
+										<li><i class="fa fa-star"></i> Automatic Ticket Generation</li>
+										<li><i class="fa fa-star"></i> Per Agent 4000 Tickets</li>
+										<li><i class="fa fa-star"></i> Go Green Digitization</li>
+                                    </ul>
+                                    <div class="pricing-footer">
+                                        <a href="/auth/signup?package=1" class="btn green">Sign Up <i class="m-icon-swapright m-icon-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="pricing hover-effect">
+                                    <div class="pricing-head">
+                                        <h3>Small</h3>
+                                        <h4><i>&#8377; 5400</i><span>Per Agent</span></h4>
+                                    </div>
+                                    <ul class="pricing-content list-unstyled">
+                                        <li><i class="fa fa-tags"></i> 10-100 Agents</li>
+                                        <li><i class="fa fa-star"></i> Unlimited Departments</li>
+                                        <li><i class="fa fa-star"></i> 1:3 Communication</li>
+                                        <li><i class="fa fa-star"></i> Live Tracking and Monitoring</li>
+                                        <li><i class="fa fa-star"></i> Brand Value</li>
+										<li><i class="fa fa-star"></i> Automatic Ticket Generation</li>
+										<li><i class="fa fa-star"></i> Per Agent 4000 Tickets</li>
+										<li><i class="fa fa-star"></i> Go Green Digitization</li>
+                                    </ul>
+                                    <div class="pricing-footer">
+                                        <a href="/auth/signup?package=2" class="btn green">Sign Up <i class="m-icon-swapright m-icon-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="pricing hover-effect">
+                                    <div class="pricing-head">
+                                        <h3>Medium</h3>
+                                        <h4><i>&#8377; 4800</i><span>Per Agent</span></h4>
+                                    </div>
+                                    <ul class="pricing-content list-unstyled">
+                                        <li><i class="fa fa-tags"></i> 100-500 Agents</li>
+                                        <li><i class="fa fa-star"></i> Unlimited Departments</li>
+                                        <li><i class="fa fa-star"></i> 1:3 Communication</li>
+                                        <li><i class="fa fa-star"></i> Live Tracking and Monitoring</li>
+                                        <li><i class="fa fa-star"></i> Brand Value</li>
+										<li><i class="fa fa-star"></i> Automatic Ticket Generation</li>
+										<li><i class="fa fa-star"></i> Per Agent 4000 Tickets</li>
+										<li><i class="fa fa-star"></i> Go Green Digitization</li>
+                                    </ul>
+                                    <div class="pricing-footer">
+                                        <a href="/auth/signup?package=3" class="btn green">Sign Up <i class="m-icon-swapright m-icon-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="pricing hover-effect">
+                                    <div class="pricing-head">
+                                        <h3>Large</h3>
+                                        <h4><i>&#8377; 4200</i><span>Per Agent</span></h4>
+                                    </div>
+                                    <ul class="pricing-content list-unstyled">
+                                        <li><i class="fa fa-tags"></i> 500+ Agents</li>
+                                        <li><i class="fa fa-star"></i> Unlimited Departments</li>
+                                        <li><i class="fa fa-star"></i> 1:3 Communication</li>
+                                        <li><i class="fa fa-star"></i> Live Tracking and Monitoring</li>
+                                        <li><i class="fa fa-star"></i> Brand Value</li>
+										<li><i class="fa fa-star"></i> Automatic Ticket Generation</li>
+										<li><i class="fa fa-star"></i> Per Agent 4000 Tickets</li>
+										<li><i class="fa fa-star"></i> Go Green Digitization</li>
+                                    </ul>
+                                    <div class="pricing-footer">
+                                        <a href="/auth/signup?package=4" class="btn green">Sign Up <i class="m-icon-swapright m-icon-white"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//End Pricing -->
+
+                            <div class="free_trail_button" style="text-align: center;">
+                            	<a href="/auth/signup?package=0"><div class="btn btn-large btn-primary" style="padding: 10px 60px;border-radius: 3px !important;font-size: 17px;margin-top: 33px;"><i class="glyphicon glyphicon-gift"></i> Start your free trail now</div></a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- END INLINE NOTIFICATIONS PORTLET-->
+        </div>
+    </div>
+    <!-- END CONTAINER -->
+{% endblock %}
+
+{% block morejs%}
+    <script src="../static/metronic-admin/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+    <script src="../static/metronic-admin/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <script src="../static/metronic-admin/scripts/app.js"></script>
+    <script>
+    jQuery(document).ready(function() {
+       App.init();
+    });
+    </script>
+{% endblock %}

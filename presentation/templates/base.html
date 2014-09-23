@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+<meta charset="utf-8" />
+<title>Chillpublic | Relax, Stop Running ...</title>
+<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+<meta content="" name="description" />
+<meta content="" name="author" />
+
+<!-- BEGIN GLOBAL MANDATORY STYLES -->
+<link href="/static/metronic-frontend/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="/static/metronic-frontend/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- BEGIN PAGE LEVEL PLUGIN STYLES -->
+<link href="/static/metronic-frontend/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+<link rel="stylesheet" href="/static/metronic-frontend/plugins/revolution_slider/css/rs-style.css" media="screen">
+<link rel="stylesheet" href="/static/metronic-frontend/plugins/revolution_slider/rs-plugin/css/settings.css" media="screen">
+<link href="/static/metronic-frontend/plugins/bxslider/jquery.bxslider.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/metronic-admin/plugins/bootstrap-toastr/toastr.min.css"/>
+<!-- END PAGE LEVEL PLUGIN STYLES -->
+
+<!-- BEGIN THEME STYLES -->
+<link href="/static/metronic-frontend/css/style-metronic.css" rel="stylesheet" type="text/css"/>
+<link href="/static/metronic-frontend/css/style.css" rel="stylesheet" type="text/css"/>
+<link href="/static/metronic-frontend/css/themes/blue.css" rel="stylesheet" type="text/css" id="style_color"/>
+<link href="/static/metronic-frontend/css/style-responsive.css" rel="stylesheet" type="text/css"/>
+<link href="/static/metronic-frontend/css/custom.css" rel="stylesheet" type="text/css"/>
+<!-- END THEME STYLES -->
+
+<link rel="shortcut icon" href="favicon.ico" />
+
+{% block addmore %}
+{% endblock %}
+</head>
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+<body>
+<!-- BEGIN STYLE CUSTOMIZER -->
+
+<!-- END BEGIN STYLE CUSTOMIZER -->
+
+<!-- BEGIN HEADER -->
+<div class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a href="/"><img style="padding:10px;" src="/static/img/logo_new.png" ></a>
+  </div>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-right" style="padding-top:15px;">
+      <li>
+      <ul class="social-icons">
+        <li>
+        <a class="facebook" data-original-title="facebook" href="#"></a>
+        </li>
+        <li>
+        <a class="googleplus" data-original-title="Goole Plus" href="#"></a>
+        </li>
+        <li>
+        <a class="twitter" data-original-title="twitter" href="#"></a>
+        </li>
+        <li>
+        <a class="linkedin" data-original-title="linkedin" href="#"></a>
+        </li>
+      </ul>
+      </li>
+    </ul>
+  </div><!--/.nav-collapse -->
+</div>
+
+<div class="navbar-collapse collapse" style="margin-bottom:10px">
+
+  <ul class="nav navbar-nav">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li>
+      <a href="#about">About</a>
+    </li>
+    <li>
+      <a href="/public">Public Support</a>
+    </li>
+    {% block pricing %}
+    <li>
+      <a href="/pricing">Plans &amp; Pricing</a>
+    </li>
+    {% endblock %}
+    <!-- <li>
+      <a href="#">Support Forums</a>
+    </li> -->
+    {# Let's not send this outside either...
+    <!--
+    <li class="dropdown active">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+      Home
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li class="active"><a href="index.html">Home Default</a></li>
+      <li><a href="page_home_fixed_header.html">Header Fixed</a></li>
+      <li><a href="page_home2.html">Home with Top Bar</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+      Pages
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="page_about.html">About Us</a></li>
+      <li><a href="page_services.html">Services</a></li>
+      <li><a href="page_prices.html">Prices</a></li>
+      <li><a href="page_faq.html">FAQ</a></li>
+      <li><a href="page_gallery.html">Gallery</a></li>
+      <li><a href="page_search_result.html">Search Result</a></li>
+      <li><a href="page_404.html">404</a></li>
+      <li><a href="page_500.html">500</a></li>
+      <li><a href="page_login.html">Login Page</a></li>
+      <li><a href="page_signup.html">Signup Page</a></li>
+      <li><a href="page_careers.html">Careers</a></li>
+      <li><a href="page_contacts.html">Contact</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+      Features
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="feature_typography.html">Typography</a></li>
+      <li><a href="feature_buttons.html">Buttons</a></li>
+      <li><a href="feature_forms.html">Forms</a></li>
+      <li><a href="feature_icons.html">Icons</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+      Portfolio
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="portfolio_4.html">Portfolio 4</a></li>
+      <li><a href="portfolio_3.html">Portfolio 3</a></li>
+      <li><a href="portfolio_2.html">Portfolio 2</a></li>
+      <li><a href="portfolio_item.html">Portfolio Item</a></li>
+    </ul>
+    </li>
+    <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false" href="#">
+      Blog
+      <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="blog.html">Blog Page</a></li>
+      <li><a href="blog_item.html">Blog Item</a></li>
+    </ul>
+    </li>
+    -->
+    #}
+  </ul>
+
+  <ul class="nav navbar-nav navbar-right">
+    {% block userpanel %}
+    <li>
+    <button class="btn green" data-toggle="modal" data-target="#myModal" style="margin-top:10px;">Sign in</button>
+    </li>
+    <li>
+    <button class="btn blue" data-toggle="modal" data-target="#myModal2" style="margin-top:10px;">Sign up</button>
+    </li>
+    {% endblock %}
+    <!--
+            <li class="dropdown">
+                <button href="signup.html" style="margin-top:10px;" class="btn blue" id="login-drop" data-toggle="dropdown">Sign up</button>
+                <div style="padding:5px" class="dropdown-menu" role="menu" aria-labelledby="login-drop">
+                    <span class="divider" role="menuitem"></span>
+                    <small role="menuitem">
+                        <a href="/auth/signup" class="signup">Customer </a> OR
+                        <a href="/pricing" class="signup"> Company</a>
+                    </small>
+                </div>
+            </li>
+            -->
+  </ul>
+</div>
+<!-- END HEADER -->
+
+<!-- Modal Block Starts  -->
+{% block modal %}
+  <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:0px">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModal2Label">Sign up for a new account</h4>
+      </div>
+      <div class="modal-body">
+        <!-- <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 login-signup-page"style="padding-bottom:10px"> -->
+        <div class="row">
+          <div class="col-md-8" style="text-align:center">
+            <p>Please select an account type:</p>
+            <a class="btn btn-primary" href="/auth/signup">Customer</a>
+            <a class="btn btn-default" href="/pricing">Company</a>
+          </div>
+        </div>
+        <!-- </div> -->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="border-bottom:0px">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <!-- <h4 class="modal-title" id="myModalLabel">Modal title</h4> -->
+      </div>
+      <div class="modal-body">
+        <!-- <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 login-signup-page"style="padding-bottom:10px"> -->
+        <form role="form" method="post" action="/auth/login" >
+
+          <h2>Login to your account</h2>
+          <div class="input-group margin-bottom-20">
+            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+            <input name="email" type="text" class="form-control" placeholder="E-mail" required>
+          </div>
+          <div class="input-group margin-bottom-20">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+            <input name="password" type="password" class="form-control" placeholder="Password">
+          </div>
+          <!-- <div>
+                        <a href="#" class="login-signup-forgot-link">Forgot?</a>
+                    </div> -->
+          <div class="row">
+            <div class="col-md-8">
+              {{ xsrf_form_html()|safe }}
+              <button type="submit" class="btn theme-btn" style="margin-left:240px">Login</button><br>
+              <a style="margin-left: 220px;" href="/forgot">Forgot password?</a>
+            </div>
+          </div>
+          <hr>
+          <div class="login-socio">
+            <ul class="social-icons  social-icons-color" style="margin-left:230px;">
+              <p class="text-muted">or Login using</p>
+              <li><a class="facebook" data-original-title="facebook" href="/auth/facebook"></a></li>
+              <li><a class="twitter" data-original-title="Twitter" href="/auth/twitter"></a></li>
+              <li><a class="googleplus" data-original-title="Google" href="/auth/google"></a></li>
+            </ul>
+          </div>
+          <!-- <hr> -->
+        </form>
+        <!-- </div> -->
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+<!-- Modal Block ends  -->
+
+{% block content %}
+<div class="page-container">
+  <!-- BEGIN PAGE CONTAINER -->
+  <!-- BEGIN REVOLUTION SLIDER -->
+  <div class="fullwidthbanner-container slider-main">
+    <div class="fullwidthabnner">
+      <ul id="revolutionul" style="display:none;">
+        <!-- THE FIRST SLIDE -->
+        <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="/static/metronic-frontend/img/sliders/revolution/thumbs/thumb2.jpg">
+        <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
+        <img src="/static/metronic-frontend/img/sliders/revolution/bg1.jpg" alt="">
+
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="100"
+          data-speed="400"
+          data-start="1500"
+          data-easing="easeOutExpo">
+          No More Waiting. Connect directly to Support Agent
+        </div>
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="120"
+          data-speed="400"
+          data-start="2000"
+          data-easing="easeOutExpo">
+          Chat, Discuss and Resolve issues quickly
+        </div>
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="140"
+          data-speed="400"
+          data-start="2500"
+          data-easing="easeOutExpo">
+	  Track Existing Issues, Keep history
+        </div>
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="180"
+          data-speed="400"
+          data-start="3000"
+          data-easing="easeOutExpo">
+	  Praise/Shout for Resolved/Unresolved Issues
+        </div>
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="200"
+          data-speed="400"
+          data-start="3500"
+          data-easing="easeOutExpo">
+	  Not satisfied? Get Public Support for unresolved issues
+        </div>
+        <div class="caption lft slide_desc slide_item_left"
+          data-x="0"
+          data-y="220"
+          data-speed="400"
+          data-start="4000"
+          data-easing="easeOutExpo">
+	  Still not satisfied? Get Legal Help
+        </div>
+	<!--
+        <a class="caption lft btn green slide_btn slide_item_left" href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes"
+          data-x="0"
+          data-y="290"
+          data-speed="400"
+          data-start="3000"
+          data-easing="easeOutExpo">
+          Purchase Now!
+	</a> -->
+        <div class="caption lfb"
+          data-x="640"
+          data-y="55"
+          data-speed="700"
+          data-start="1000"
+          data-easing="easeOutExpo"  >
+          <img src="/static/metronic-frontend/img/sliders/revolution/man-winner.png" alt="Image 1">
+        </div>
+        </li>
+
+        <!-- THE SECOND SLIDE -->
+        <li data-transition="fade" data-slotamount="7" data-masterspeed="300" data-delay="9400" data-thumb="/static/metronic-frontend/img/sliders/revolution/thumbs/thumb2.jpg">
+        <img src="/static/metronic-frontend/img/sliders/revolution/bg2.jpg" alt="">
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="100"
+          data-speed="400"
+          data-start="3500"
+          data-easing="easeOutExpo">
+	  Genuine Feedback and direct interaction with customers
+        </div>
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="120"
+          data-speed="400"
+          data-start="4000"
+          data-easing="easeOutExpo">
+          Increased Brand Value by resolving issues quickly
+        </div>
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="140"
+          data-speed="400"
+          data-start="4500"
+          data-easing="easeOutExpo">
+          Increased after sales customer satisfaction
+        </div>
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="180"
+          data-speed="400"
+          data-start="5000"
+          data-easing="easeOutExpo">
+	  Realtime evaluation from customers
+        </div>
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="200"
+          data-speed="400"
+          data-start="5500"
+          data-easing="easeOutExpo">
+	  Track Support Agent Performance, Issues, Company Praise/Shout
+        </div>
+        <div class="caption lfl slide_desc slide_item_left"
+          data-x="0"
+          data-y="220"
+          data-speed="400"
+          data-start="6000"
+          data-easing="easeOutExpo">
+	  Save time, Infrastructure and Money
+        </div>
+        <div class="caption lfr slide_item_right"
+          data-x="635"
+          data-y="105"
+          data-speed="1200"
+          data-start="1500"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/mac.png" alt="Image 1">
+        </div>
+        <div class="caption lfr slide_item_right"
+          data-x="580"
+          data-y="245"
+          data-speed="1200"
+          data-start="2000"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/ipad.png" alt="Image 1">
+        </div>
+        <div class="caption lfr slide_item_right"
+          data-x="735"
+          data-y="290"
+          data-speed="1200"
+          data-start="2500"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/iphone.png" alt="Image 1">
+        </div>
+        <div class="caption lfr slide_item_right"
+          data-x="835"
+          data-y="230"
+          data-speed="1200"
+          data-start="3000"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/macbook.png" alt="Image 1">
+        </div>
+        <div class="caption lft slide_item_right"
+          data-x="865"
+          data-y="45"
+          data-speed="500"
+          data-start="5000"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/hint1-blue.png" id="rev-hint1" alt="Image 1">
+        </div>
+        <div class="caption lfb slide_item_right"
+          data-x="355"
+          data-y="355"
+          data-speed="500"
+          data-start="5500"
+          data-easing="easeOutBack">
+          <img src="/static/metronic-frontend/img/sliders/revolution/hint2-blue.png" id="rev-hint2" alt="Image 1">
+        </div>
+
+        </li>
+
+	{#
+        <!-- THE THIRD SLIDE -->
+        <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="/static/metronic-frontend/img/sliders/revolution/thumbs/thumb2.jpg">
+        <img src="/static/metronic-frontend/img/sliders/revolution/bg3.jpg" alt="">
+        <div class="caption lfl slide_item_left"
+          data-x="20"
+          data-y="95"
+          data-speed="400"
+          data-start="1500"
+          data-easing="easeOutBack">
+          <iframe src="http://player.vimeo.com/video/56974716?portrait=0" width="420" height="240" style="border:0" allowFullScreen></iframe>
+        </div>
+        <div class="caption lfr slide_title"
+          data-x="470"
+          data-y="100"
+          data-speed="400"
+          data-start="2000"
+          data-easing="easeOutExpo">
+          Responsive Video Support
+        </div>
+        <div class="caption lfr slide_subtitle"
+          data-x="470"
+          data-y="170"
+          data-speed="400"
+          data-start="2500"
+          data-easing="easeOutExpo">
+          Youtube, Vimeo and others.
+        </div>
+        <div class="caption lfr slide_desc"
+          data-x="470"
+          data-y="220"
+          data-speed="400"
+          data-start="3000"
+          data-easing="easeOutExpo">
+          Lorem ipsum dolor sit amet, consectetuer elit sed diam<br> nonummy amet euismod dolore.
+        </div>
+        <a class="caption lfr btn yellow slide_btn" href=""
+          data-x="470"
+          data-y="280"
+          data-speed="400"
+          data-start="3500"
+          data-easing="easeOutExpo">
+          Watch more Videos!
+        </a>
+        </li>
+
+        <!-- THE FORTH SLIDE -->
+        <li data-transition="fade" data-slotamount="8" data-masterspeed="700" data-delay="9400" data-thumb="/static/metronic-frontend/img/sliders/revolution/thumbs/thumb2.jpg">
+        <!-- THE MAIN IMAGE IN THE FIRST SLIDE -->
+        <img src="/static/metronic-frontend/img/sliders/revolution/bg4.jpg" alt="">
+        <div class="caption lft slide_title"
+          data-x="0"
+          data-y="105"
+          data-speed="400"
+          data-start="1500"
+          data-easing="easeOutExpo">
+          What else included ?
+        </div>
+        <div class="caption lft slide_subtitle"
+          data-x="0"
+          data-y="180"
+          data-speed="400"
+          data-start="2000"
+          data-easing="easeOutExpo">
+          The Most Complete Admin Theme
+        </div>
+        <div class="caption lft slide_desc"
+          data-x="0"
+          data-y="225"
+          data-speed="400"
+          data-start="2500"
+          data-easing="easeOutExpo">
+          Lorem ipsum dolor sit amet, consectetuer elit sed diam<br> nonummy amet euismod dolore.
+        </div>
+        <a class="caption lft slide_btn btn red slide_item_left" href="http://www.keenthemes.com/preview/index.php?theme=metronic_admin" target="_blank"
+          data-x="0"
+          data-y="300"
+          data-speed="400"
+          data-start="3000"
+          data-easing="easeOutExpo">
+          Learn More!
+        </a>
+        <div class="caption lft start"
+          data-x="670"
+          data-y="55"
+          data-speed="400"
+          data-start="2000"
+          data-easing="easeOutBack"  >
+          <img src="/static/metronic-frontend/img/sliders/revolution/iphone_left.png" alt="Image 2">
+        </div>
+
+        <div class="caption lft start"
+          data-x="850"
+          data-y="55"
+          data-speed="400"
+          data-start="2400"
+          data-easing="easeOutBack"  >
+          <img src="/static/metronic-frontend/img/sliders/revolution/iphone_right.png" alt="Image 3">
+        </div>
+        </li>
+	#}
+      </ul>
+      <div class="tp-bannertimer tp-bottom"></div>
+    </div>
+  </div>
+  <!-- END REVOLUTION SLIDER -->
+  <div style="text-align:center; margin-top: 10px; padding-bottom:10px">
+    <button style="border-radius: 10px !important; padding: 10px 50px;" class="btn red btn-lg" data-toggle="modal" data-target="#myModal" > <span class="fa fa-group"></span>  Connect to Agent </button>
+  </div>
+  <div class="row">
+    <div class="col-md-6" style="padding-right:0px;padding-left:45px">
+      <div class="panel panel-info">
+        <div class="panel-heading"><h3 class="panel-title">Recent Issues Resolved</h3></div>
+        <div class="panel-body">
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6" style="padding-left:0px;">
+      <div class="panel panel-warning">
+        <div class="panel-heading"><h3 class="panel-title">Recent Praise</h3></div>
+        <div class="panel-body">
+          <ul>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="col-md-6 panel panel-warning">
+                <h3 class="panel-title panel-heading ">Recent Praise</h3>
+                <ul class="panel-body">
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div> -->
+  </div>
+  <!-- END BUTTON -->
+  {% endblock %}
+</div>
+<!-- END PAGE CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-sm-4 space-mobile" id="about">
+        <!-- BEGIN ABOUT -->
+        <h2>About</h2>
+        <p class="margin-bottom-30">ChillPublic is Single Platform Solution for Customer Company Agent Communication.</p>
+        <!-- END ABOUT -->
+      </div>
+
+      <div class="col-md-4 col-sm-4 space-mobile">
+        <!-- BEGIN CONTACTS -->
+        <h2>Contact Us</h2>
+        <address class="margin-bottom-40">
+	  91-96117-22665 <br>
+          #98, Himagiri Complex, Banneghatta Road <br>
+          Bangalore, India. 560083
+        </address>
+        <!-- END CONTACTS -->
+      </div>
+
+      <div class="col-md-4 col-sm-4 space-mobile">
+        <!-- BEGIN CONTACTS -->
+        <h2>Information and PR</h2>
+        <address class="margin-bottom-40">
+		<a href="mailto:akanksha@chillpublic.com">info@chillpublic.com</a> <br>
+		<a href="mailto:akanksha@chillpublic.com">akanksha@chillpublic.com</a>
+        </address>
+        <!-- END CONTACTS -->
+      </div>
+
+      {#
+      <div class="col-md-4 col-sm-4 space-mobile">
+        <!-- BEGIN SUBSCRIBE -->
+        <h2>Monthly Newsletter</h2>
+        <p>Stay up to date with our latest news and product releases by signing up to our newsletter.</p>
+        <form action="#" class="form-subscribe">
+          <div class="input-group input-large">
+            <input class="form-control" type="text">
+            <span class="input-group-btn">
+              <button class="btn theme-btn" type="button">SUBSCRIBE</button>
+            </span>
+          </div>
+        </form>
+        <!-- END SUBSCRIBE -->
+      </div>
+      #}
+
+    </div>
+  </div>
+</div>
+<!-- END FOOTER -->
+
+<!-- BEGIN COPYRIGHT -->
+<div class="copyright">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-sm-8">
+        <p>
+        <span class="margin-right-10">2013 © Chillpublic. ALL Rights Reserved.</span>
+        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        </p>
+      </div>
+      <div class="col-md-4 col-sm-4">
+        <ul class="social-footer">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+          <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+          <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-skype"></i></a></li>
+          <li><a href="#"><i class="fa fa-github"></i></a></li>
+          <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+          <li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END COPYRIGHT -->
+
+<!-- Load javascripts at bottom, this will reduce page load time -->
+<!-- BEGIN CORE PLUGINS(REQUIRED FOR ALL PAGES) -->
+<!--[if lt IE 9]>
+    <script src="/static/metronic-frontend/plugins/respond.min.js"></script>
+    <![endif]-->
+<script src="/static/metronic-frontend/plugins/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="/static/metronic-frontend/plugins/jquery-migrate-1.2.1.min.js" type="text/javascript"></script>
+<script src="/static/metronic-frontend/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="/static/metronic-frontend/plugins/hover-dropdown.js"></script>
+<script type="text/javascript" src="/static/metronic-frontend/plugins/back-to-top.js"></script>
+<!-- END CORE PLUGINS -->
+
+<!-- BEGIN PAGE LEVEL JAVASCRIPTS(REQUIRED ONLY FOR CURRENT PAGE) -->
+<script type="text/javascript" src="/static/metronic-frontend/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="/static/metronic-frontend/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.plugins.min.js"></script>
+<script type="text/javascript" src="/static/metronic-frontend/plugins/revolution_slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+<script type="text/javascript" src="/static/metronic-frontend/plugins/bxslider/jquery.bxslider.min.js"></script>
+<script src="/static/metronic-frontend/scripts/app.js"></script>
+<script src="/static/metronic-frontend/scripts/index.js"></script>
+<script src="/static/metronic-admin/plugins/bootstrap-toastr/toastr.min.js"></script>
+<script src="/static/carhartl-jquery-cookie-3caf209/jquery.cookie.js"></script>
+{% block morejs%}
+{% endblock %}
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    App.init();
+    App.initBxSlider();
+    Index.initRevolutionSlider();
+
+    toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "positionClass": "toast-top-right",
+    "onclick": null,
+    "showDuration": "1000",
+    "hideDuration": "0",
+    "timeOut": "0",
+    "extendedTimeOut": "0",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+    }
+
+    if ($.cookie('flash')) {
+      var q = $.cookie('flash').split('_');
+      var l = q.splice(0, 1);
+
+      toastr[l](q);
+      $.removeCookie('flash');
+    }
+
+});
+</script>
+<!-- END PAGE LEVEL JAVASCRIPTS -->
+
+</body>
+<!-- END BODY -->
+</html>

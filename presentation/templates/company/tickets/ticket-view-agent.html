@@ -1,0 +1,286 @@
+{% extends "company/base.html" %}
+{% block title %}
+Agent Dashboard
+{% endblock %}
+{% block morelink %}
+<style type="text/css">
+  .spacer {
+    height: 10px;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/agent">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+
+  </a>
+</li>
+<li class=" ">
+  <a href="/agent/profile">
+    <i class="fa fa-wrench"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="/agent/tickets">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<!--
+<li class="">
+  <a href="/agent/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">Forms</span>
+
+  </a>
+</li>
+-->
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Ticket
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/agent">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="/agent/tickets">Tickets</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Ticket
+              [id: {{ ticket[0] }} / time opened: {{ ticket[6].strftime("%Y-%m-%d %H:%M:%S") }}]
+            </a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN SAMPLE TABLE PORTLET-->
+        <div class="portlet">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-ticket"></i>View Ticket
+            </div>
+          </div>
+          <div class="portlet-body">
+            <div class="post-comment">
+              <form role="form">
+                <div class="form-group">
+                  <label >Title</label>
+                  <input type="text" class="form-control"
+                  value="{{ ticket[1] }}"
+                  placeholder="Enter title"
+                  name="t_title"
+                  disabled>
+                </div>
+                <div class="form-group">
+                  <label class="control-label">Description
+                  </label>
+                  <textarea disabled class="col-md-10 form-control" rows="5">{{ ticket[2] }}</textarea>
+                  {#
+                  <p>&nbsp;</p>
+                  <select class="col-md-6 form-control">
+                    <option value="open">Open Ticket</option>
+                    <option value="hold">Hold Ticket</option>
+                    <option value="close">Close Ticket</option>
+                    <option value="re-open">Re-Open Ticket</option>
+                  </select>
+                  #}
+                </div>
+                <div class="form-group">
+                {% if attachment %}
+                  <label class="control-label">Attachment(s): </label>
+                  <a class="label label-default" href="/uploads/{{ attachment[0][1] }}" target="_blank">{{ attachment[0][0] }}</a>
+                {% endif %}
+                {% if form_data %}
+                <br><label class="control-label">Form available: </label>
+                <a class="label label-default" id="formlink" href="/agent/tickets/view?ticket={{ ticket[0] }}&amp;form={{ form_data }}">{{ ticket[1] }}</a>
+                {% endif %}
+                </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- END SAMPLE TABLE PORTLET-->
+        </div>
+      </div>
+      <div class="spacer hidden-xs hidden-sm"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <div id="comment_div" style="max-height:150px; overflow:auto">
+          <ul id="comment_list">
+            {% for comment in thread %}
+            <li>
+              {{ comment[0] }} -- by {{ comment[2] }}
+              {% if comment[1] %}
+              ({{ comment[1] }})
+              {% endif %}
+              on {{ comment[3].strftime("%Y-%m-%d %H:%M:%S") }}
+              {% if attachment %}
+              {% for i in attachment %}
+                {% if comment[4] == i[2] %}
+                with <a href="/uploads/{{ i[1] }}" target="_blank">{{ i[0] }}</a>
+                {% endif %}
+              {% endfor %}
+              {% endif %}
+            </li>
+            {% endfor %}
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="spacer hidden-xs hidden-sm"></div>
+      <div class="row">
+        <div class="col-md-12">
+          <form role="form" method="post" id="ticketform">
+            <div class="form-group">
+              {% if ticket[7] == 'live' %}
+              <div class="input-group">
+                <input type="text" class="form-control" id="comment" name="chat" placeholder="Enter text" required="true">
+                <span class="input-group-btn">
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </span>
+              </div><!-- /input-group -->
+            </div>
+            <input type="hidden" value="{{ ticket[0] }}" name="tid">
+            {{ xsrf_form_html()|safe }}
+          </form>
+          <form method="post" role="form">
+            <input type="hidden" name="comment" value="Changing ticket state">
+            <div class="form-group">
+              {% else %}
+              <label class="control-label">Comment
+              </label>
+              <textarea class="col-md-10 form-control" id="comment" name="comment" required="true" rows="2"></textarea>
+              {% endif %}
+              <div class="spacer"></div>
+              <label class="control-label">Set status</label>
+              <select name="status" class="col-md-6 form-control">
+                <option value="live"
+                {% if ticket[7] == 'live' %}selected="true"{% endif %}
+                >Live Ticket</option>
+                <option value="open"
+                {% if ticket[7] == 'open' %}selected="true"{% endif %}
+                >Open Ticket</option>
+                <option value="hold"
+                {% if ticket[7] == 'hold' %}selected="true"{% endif %}
+                >Hold Ticket</option>
+                <option value="close"
+                {% if ticket[7] == 'close' %}selected="true"{% endif %}
+                >Close Ticket</option>
+                <option value="re-open"
+                {% if ticket[7] == 're-open' %}selected="true"{% endif %}
+                >Re-Open Ticket</option>
+              </select>
+            </div>
+            <input type="hidden" value="{{ ticket[0] }}" name="tid">
+            {{ xsrf_form_html()|safe }}
+            <button class="margin-top-20 btn blue pull-right" type="submit">Update</button>
+          </form>
+        </div>
+      </div>
+      <!-- END PAGE HEADER-->
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block morescript %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    var objDiv = document.getElementById("comment_div");
+    objDiv.scrollTop = objDiv.scrollHeight;
+
+    $('#comment').focus();
+  });
+
+  {% if ticket[7] == 'live' %}
+  var ws;
+
+  function wsconnect() {
+
+    var ws_proto;
+    if (location.protocol == 'https:') {
+      ws_proto = 'wss';
+    } else {
+      ws_proto = 'ws';
+    }
+
+    ws = new WebSocket(
+      ws_proto +
+      "://" +
+      location.href.split('/')[2] +
+      "/wsticket/{{ ticket[0] }}"
+    );
+
+    ws.onmessage = function (evt) {
+      $('#agentwait').remove();
+      $('#comment_list').append('<li>' + evt.data  + '</li>');
+      var objDiv = document.getElementById("comment_div");
+      objDiv.scrollTop = objDiv.scrollHeight;
+    }
+
+    ws.onclose = function (evt) {
+      wsconnect();
+    }
+
+  }
+
+  $(document).ready(function(e){
+    wsconnect();
+  })
+
+  $('#ticketform').on('submit', function(e){
+    e.preventDefault();
+
+    if (!$('#comment').val().length > 0) {
+      return;
+    }
+
+    // $('#comment').attr('disabled', true);
+
+    $.post(location.href,
+      $('#ticketform').serialize()
+    ).done(function(d) {
+      ws.send($('#comment').val());
+      $('#comment_list').append('<li>You: ' + $('#comment').val() + '</li>');
+      var objDiv = document.getElementById("comment_div");
+      objDiv.scrollTop = objDiv.scrollHeight;
+      $('#comment').attr('disabled', false);
+      $('#comment').val('');
+    }).fail(function(f) {
+      toastr['error']('There was an error with posting your comment.');
+      $('#comment').focus();
+    });
+
+  });
+  {% endif %}
+</script>
+{% endblock %}

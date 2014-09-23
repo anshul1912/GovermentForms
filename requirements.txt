@@ -1,0 +1,9 @@
+Jinja2==2.7.2
+MarkupSafe==0.18
+Momoko==1.0.0
+backports.ssl-match-hostname==3.4.0.2
+lxml==3.3.1
+psycopg2==2.5.2
+redis==2.9.0
+tornado==3.2
+wsgiref==0.1.2

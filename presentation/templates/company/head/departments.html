@@ -1,0 +1,194 @@
+{% extends "company/base.html" %}
+{% block morelink %}
+{#
+<script type="text/javascript" src="/static/js/jquery-1.8.3.min.js"></script>
+<script>
+  $(function () {
+    $(".data").dblclick(function () {
+      var OriginalContent = $(this).text();
+
+      $(this).addClass("cellEditing");
+      $(this).html("<input type='text' value='" + OriginalContent + "' />");
+      $(this).children().first().focus();
+
+      $(this).children().first().keypress(function (e) {
+        if (e.which == 13) {
+          var newContent = $(this).val();
+          $(this).parent().text(newContent);
+          $(this).parent().removeClass("cellEditing");
+        }
+      });
+
+      $(this).children().first().blur(function(){
+        $(this).parent().text(OriginalContent);
+        $(this).parent().removeClass("cellEditing");
+      });
+    });
+  });
+</script>
+#}
+
+<style type="text/css">
+  .deletebtn {
+    background-color: transparent; color: #0D638F; border: none; cursor: pointer;
+  }
+
+  .deletebtn:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+
+{% block sidenav %}
+<li class="">
+  <a href="/company">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/company/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="#">
+    <i class="fa fa-leaf"></i>
+    <span class="title">
+      Departments
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class=" ">
+  <a href="/company/agents">
+    <i class="fa fa-folder-open"></i>
+    <span class="title">
+      Agents
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/company/forms">
+    <i class="fa fa-table"></i>
+    <span class="title">
+      Forms
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/company/packages">
+    <i class="fa fa-download"></i>
+    <span class="title">
+      Packages
+    </span>
+
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Departments
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/company">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Departments</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-reorder"></i>Department List
+            </div>
+          </div>
+          <div class="portlet-body">
+            <table class="editableTable table table-bordered table-striped" border="1" cellpadding="5" cellspacing="5">
+              <thead>
+                <tr>
+                  <th style="width:25%">Department</th>
+                  <th style="width:25%">Description</th>
+                  <th style="width:25%">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for department in departments %}
+                <tr>
+                  <td class="data">{{ department[0] }}</td>
+                  <td>{{ department[1] }}</td>
+                  <td><a href="/company/departments/edit?department={{ department[2] }}">Edit</a></td>
+                  <td>
+                    <form role="form" method="post">
+                      {{ xsrf_form_html()|safe }}
+                      <input name="department_id" value="{{ department[2] }}" type="hidden">
+                      <input name="action" value="delete" type="hidden">
+                      <input class="deletebtn" type="Submit" value="Delete">
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+                <!--
+                <tr>
+                  <td class="data">Y</td>
+                  <td>7</td>
+                  <td>15</td>
+                </tr>
+                -->
+              </tbody>
+            </table>
+            <!--
+            <button type="button" class="btn btn-sm" style="float:left">Previous</button>
+            <button type="button" class="btn btn-sm" style="float:right">Next</button>
+            <br>
+            <br>
+            <br>
+            -->
+            <div style="float:right" onclick="window.location.href='/company/departments/add';">
+              <button type="button" class="btn btn blue">Add Department</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block morejs %}
+<script type="text/javascript">
+  $('.deletebtn').on('click', function(e){
+    $(this).val('Please wait...');
+    $(this).addClass('disabled');
+  });
+</script>
+{% endblock %}

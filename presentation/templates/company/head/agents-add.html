@@ -1,0 +1,183 @@
+{% extends "company/base.html" %}
+{% block morelink %}
+{% endblock %}
+
+{% block sidenav %}
+	<li class="">
+		<a href="/company">
+		<i class="fa fa-home"></i>
+		<span class="title">
+			Dashboard
+		</span>
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/profile">
+		<i class="fa fa-cogs"></i>
+		<span class="title">
+			Profile
+		</span>
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/departments">
+		<i class="fa fa-leaf"></i>
+		<span class="title">
+			Departments
+		</span>
+
+		</a>
+	</li>
+	<li class="start active ">
+		<a href="/company/agents">
+		<i class="fa fa-folder-open"></i>
+		<span class="title">
+			Agents
+		</span>
+		<span class="selected">
+		</span>
+		<span class="open">
+		</span>
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/forms">
+		<i class="fa fa-table"></i>
+		<span class="title">
+			Forms
+		</span>
+
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/packages">
+		<i class="fa fa-download"></i>
+		<span class="title">
+			Packages
+		</span>
+
+		</a>
+	</li>
+{% endblock %}
+
+{% block content %}
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+					<h3 class="page-title">
+					Agent
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/company">Home</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/company/agents">Agents</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="#">
+							{% if agent %}
+							Edit Agent
+							{% else %}
+							Add Agent
+							{% endif %}
+							</a>
+						</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-reorder"></i>
+								{% if agent %}
+								Editing Agent
+								{% else %}
+								Adding Agent
+								{% endif %}
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<form role="form" method="post">
+								<div class="form-body">
+									<div class="form-group">
+										<label >Name</label>
+										<input required="true" type="text" class="form-control" id="agent" name="agent"
+										{% if agent %}
+										value="{{ agent[0] }}"
+										{% else %}
+										placeholder="Enter Name"
+										{% endif %}
+										>
+									</div>
+									<div class="form-group">
+										<label >Email</label>
+										<input type="text" class="form-control" id="agent" name="agent_email"
+										{% if agent %}
+										value="{{ agent[1] }}"
+										{% else %}
+										placeholder="Enter Email"
+										required="true"
+										{% endif %}
+										>
+									</div>
+									<div class="form-group">
+										<label >Password</label>
+										<input type="password" class="form-control" id="password" name="password"
+										{% if agent %}
+										placeholder="Enter New Password"
+										{% else %}
+										placeholder="Enter Password"
+										required="true"
+										{% endif %}
+										>
+									</div>
+									<div class="form-group">
+										<label >Department</label>
+										<select name="department" class="form-control">
+											{% for department in departments %}
+											<option value="{{ department[0] }}"
+											{% if department[0] == agent[2] %}
+											selected
+											{% endif %}
+											>{{ department[1] }}</option>
+											{% endfor %}
+										</select>
+									</div>
+								</div>
+								<div class="form-actions">
+									{% if agent %}
+									<input name="agent_id" value="{{ agent[3] }}" type="hidden">
+									{% endif %}
+									{{ xsrf_form_html()|safe }}
+									<button type="submit" class="btn blue">
+									{% if agent %}
+									Update
+									{% else %}
+									Add
+									{% endif %}
+									</button>
+									<button type="button" class="btn default" onclick="window.location.href='/company/agents';">Cancel</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block morejs %}
+{% endblock %}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {% block meta %}
+    <meta name="author" content="Knowledge Ashram Pvt. Ltd.">
+    <meta name="description" content="PayU Test Page">
+    {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+      {% block title %}
+        Payment Gateway Test (PayU)
+      {% endblock %}
+    </title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim IE8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/vendor/html5shiv.js"></script>
+    <![endif]-->
+    {% block morehead %}
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block main %}
+    {% if redir %}
+    <div class="container" style="padding: 30px 15px">
+      <p class="lead">
+        Redirecting to payment gateway ...
+      </p>
+    </div>
+    {% endif %}
+    <div class="container" style="padding: 30px 15px;
+      {% if redir %}
+      display: none;
+      {% endif %}
+    ">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead">PayU Payment Gateway Test Page</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Use the following card details <strong>to do test transactions</strong><br>
+          CardName - Any name<br>
+          CardNumber - 5123456789012346<br>
+          CVV - 123<br>
+          Expiry - 05-17</p>
+        </div>
+        <div class="col-md-6">
+          <p style="text-align:justify">
+            This page collects the bare basic information needed to successfully execute a transaction via the PayU Payment Gateway. Please fill in all the fields and use the specified card details to test the transaction flow. The transaction ID needs to be unique and may not be used twice. All other fields are open to arbitrary input. The application will display the data we received at the end of the transaction.
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form-horizontal" id="paymentform" method='post' role="form">
+            <div class="form-group">
+              <label class="col-sm-2" for="firstname">Name</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter name" value="{{ firstname }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="phone">Phone</label>
+              <div class="col-sm-10">
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="{{ phone }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="email">Email</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="{{ email }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="txnid">Transaction ID</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="txnid" name="txnid" placeholder="Enter transaction id" value="{{ txnid }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="productinfo">Product Info</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="productinfo" name="productinfo" placeholder="Enter product info" value="{{ productinfo }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-2" for="amount">Amount</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="amount" name="amount" placeholder="Enter amount" value="{{ amount }}">
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="hidden" id="key" name="key" value="{{ key }}">
+              <input type="hidden" class="postback" id="surl" name="surl" value="/pgtest">
+              <input type="hidden" class="postback" id="curl" name="curl" value="/pgtest">
+              <input type="hidden" class="postback" id="furl" name="furl" value="/pgtest">
+              <input type="hidden" id="fid" name="fid" value="1">
+              <input type="hidden" id="hash" name="hash" value="{{ hash }}">
+              {{ xsrf_form_html()|safe }}
+            </div>
+            <button class="form-control btn btn-primary"
+              {% if redir %}
+                disabled
+              {% endif %}
+            type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div><!-- /.container -->
+    {% endblock %}
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block tail %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    {% endblock %}
+    {% block moretail %}
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('.postback').val(location.href);
+        {% if redir %}
+        $('#paymentform').attr('action', 'https://test.payu.in/_payment');
+        $('#paymentform').submit();
+        {% endif %}
+      });
+    </script>
+    {% endblock %}
+  </body>
+</html>

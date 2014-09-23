@@ -1,0 +1,165 @@
+{% extends "company/base.html" %}
+{% block addmore %}
+{% endblock %}
+{% block morelink %}
+<style type="text/css">
+  .deletebtn {
+    background-color: transparent; color: #0D638F; border: none; cursor: pointer;
+  }
+
+  .deletebtn:hover {
+    text-decoration: underline;
+  }
+</style>
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/company">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Dashboard
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/company/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/company/departments">
+    <i class="fa fa-leaf"></i>
+    <span class="title">
+      Departments
+    </span>
+
+  </a>
+</li>
+<li class=" ">
+  <a href="/company/agents">
+    <i class="fa fa-folder-open"></i>
+    <span class="title">
+      Agents
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="#">
+    <i class="fa fa-table"></i>
+    <span class="title">
+      Forms
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/company/packages">
+    <i class="fa fa-leaf"></i>
+    <span class="title">
+      Packages
+    </span>
+
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Forms
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/company">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Forms</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-edit"></i>Form List
+            </div>
+          </div>
+          <div class="portlet-body">
+            <table class="table table-striped table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Form Name
+                  </th>
+                  <th>
+                    Delete
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for form in forms %}
+                <tr>
+                  <td>
+                    <a href="/company/forms/view?form={{ form[0] }}">{{ form[1] }}</a>
+                  </td>
+                  <td>
+                    <form role="form" method="post">
+                      {{ xsrf_form_html()|safe }}
+                      <input name="fid" value="{{ form[0] }}" type="hidden">
+                      <input name="action" value="delete" type="hidden">
+                      <input class="deletebtn" type="Submit" value="Delete">
+                    </form>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+              <!--
+              <button type="button" class="btn btn-sm" style="float:left">Previous</button>
+              <button type="button" class="btn btn-sm" style="float:right">Next</button>
+              <br>
+              <br>
+              <br>
+            -->
+            <div style="float:right" onclick="window.location.href='/company/forms/add';">
+              <button type="button" class="btn btn blue">Add Form</button>
+            </div>
+          </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block morejs %}
+<script type="text/javascript">
+  $('.deletebtn').on('click', function(e){
+    $(this).val('Please wait...');
+    $(this).addClass('disabled');
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,154 @@
+{% extends "company/base.html" %}
+{% block morelink %}
+{% endblock %}
+
+{% block sidenav %}
+	<li class="">
+		<a href="/company">
+		<i class="fa fa-home"></i>
+		<span class="title">
+			Dashboard
+		</span>
+
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/profile">
+		<i class="fa fa-cogs"></i>
+		<span class="title">
+			Profile
+		</span>
+
+		</a>
+	</li>
+	<li class="start active">
+		<a href="/company/departments">
+		<i class="fa fa-leaf"></i>
+		<span class="title">
+			Departments
+		</span>
+		<span class="selected">
+		</span>
+		<span class="open">
+		</span>
+		</a>
+	</li>
+	<li class=" ">
+		<a href="/company/agents">
+		<i class="fa fa-folder-open"></i>
+		<span class="title">
+			Agents
+		</span>
+
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/forms">
+		<i class="fa fa-table"></i>
+		<span class="title">
+			Forms
+		</span>
+
+		</a>
+	</li>
+	<li class="">
+		<a href="/company/packages">
+		<i class="fa fa-download"></i>
+		<span class="title">
+			Packages
+		</span>
+
+		</a>
+	</li>
+{% endblock %}
+
+{% block content %}
+	<div class="page-content-wrapper">
+		<div class="page-content">
+			<!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+			<!-- BEGIN PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- BEGIN PAGE TITLE & BREADCRUMB-->
+					<h3 class="page-title">
+					Department
+					</h3>
+					<ul class="page-breadcrumb breadcrumb">
+						<li>
+							<i class="fa fa-home"></i>
+							<a href="/company">Home</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="/company/departments">Department</a>
+							<i class="fa fa-angle-right"></i>
+						</li>
+						<li>
+							<a href="#">
+								{% if department %}
+								Edit Department
+								{% else %}
+								Add Department
+								{% endif %}
+							</a>
+						</li>
+					</ul>
+					<!-- END PAGE TITLE & BREADCRUMB-->
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="portlet box blue">
+						<div class="portlet-title">
+							<div class="caption">
+								<i class="fa fa-reorder"></i>
+								{% if department %}
+								Editing Department
+								{% else %}
+								Adding Department
+								{% endif %}
+							</div>
+						</div>
+						<div class="portlet-body form">
+							<form role="form" method="post">
+								<div class="form-body">
+									<div class="form-group">
+										<label >Department Name</label>
+										<input required="true" type="text" class="form-control" id="department" name="department"
+										{% if department %}
+										value="{{ department[0] }}"
+										{% else %}
+										placeholder="Enter Name">
+										{% endif %}
+									</div>
+									<div class="form-group">
+										<label>Description</label>
+										<textarea name="description" class="form-control" rows="3">{% if department %}{{ department[1] }}{% endif %}</textarea>
+									</div>
+								</div>
+								<div class="form-actions">
+									{% if department %}
+									<input name="department_id" value="{{ department[2] }}" type="hidden">
+									{% endif %}
+									{{ xsrf_form_html()|safe }}
+									<button type="submit" class="btn blue">
+									{% if department %}
+									Update
+									{% else %}
+									Add
+									{% endif %}
+									</button>
+									<button type="button" class="btn default" onclick="window.location.href='/company/departments';">Cancel</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block morejs %}
+{% endblock %}

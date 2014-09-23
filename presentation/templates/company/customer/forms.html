@@ -1,0 +1,169 @@
+{% extends "company/base.html" %}
+{% block title %}
+Customer Dashboard
+{% endblock %}
+{% block sidenav %}
+<li class="">
+  <a href="/customer">
+    <i class="fa fa-home"></i>
+    <span class="title">
+      Live Support
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/customer/profile">
+    <i class="fa fa-cogs"></i>
+    <span class="title">
+      Profile
+    </span>
+  </a>
+</li>
+<li class="">
+  <a href="/customer/tickets">
+    <i class="fa fa-ticket"></i>
+    <span class="title">
+      Tickets
+    </span>
+
+  </a>
+</li>
+<li class="">
+  <a href="/customer/solved">
+    <i class="fa fa-flag"></i>
+    <span class="title">
+      Resolved
+    </span>
+
+  </a>
+</li>
+<li class="start active">
+  <a href="/customer/forms">
+    <i class="fa fa-envelope"></i>
+    <span class="title">
+      Forms
+    </span>
+    <span class="selected">
+    </span>
+    <span class="open">
+    </span>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="page-content-wrapper">
+  <div class="page-content">
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+        <h3 class="page-title">
+          Forms
+        </h3>
+        <ul class="page-breadcrumb breadcrumb">
+          <li>
+            <i class="fa fa-home"></i>
+            <a href="/customer">Home</a>
+            <i class="fa fa-angle-right"></i>
+          </li>
+          <li>
+            <a href="#">Forms</a>
+          </li>
+        </ul>
+        <!-- END PAGE TITLE & BREADCRUMB-->
+      </div>
+    </div>
+    <!-- END PAGE HEADER-->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-reorder"></i> Online Form Submission
+            </div>
+          </div>
+          <div class="portlet-body">
+            <form role="form" action="/customer/forms/view">
+              <div class="form-group">
+                <label >Select Company</label>
+                <select class="form-control" id="company" name="company">
+                  <option></option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Select Department</label>
+                <select class="form-control" disabled="" id="department" name="department">
+
+                </select>
+              </div>
+              <div class="form-group">
+                <label >Select Form</label>
+                <select class="form-control" disabled="" id="form" name="form">
+
+                </select>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn blue pull-right">Open Form</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block morescript %}
+<script type="text/javascript">
+  function updateDepartments() {
+    $('#department').attr('disabled', true);
+    $('#form').attr('disabled', true);
+
+    var q = $('#company').val();
+    $('#department').html('');
+    $('#form').html('');
+
+    $.getJSON('/customer?json=departments&id=' + q).done(function(data){
+      $('#department').attr('disabled', false);
+      $('#department').append("<option></option>");
+      for (var i=0; i<=data.length; i++) {
+        $('#department').append("<option value=" + data[i][0] + ">" + data[i][1] + "</option>");
+      }
+    });
+  }
+
+  function updateForms() {
+    $('#form').attr('disabled', true);
+    var p = $('#company').val();
+    var q = $('#department').val();
+    $('#form').html('');
+
+    $.getJSON('/customer/forms?json=forms&company=' + p + '&department=' + q).done(function(data){
+      $('#form').attr('disabled', false);
+      for (var i=0; i<=data.length; i++) {
+        $('#form').append("<option value=" + data[i][0] + ">" + data[i][1] + "</option>");
+      }
+    });
+  }
+
+  $(document).ready(function(){
+    $.getJSON('/customer?json=companies').done(function(data){
+      var companies = data;
+      for (var i=0; i<=companies.length; i++) {
+        $('#company').append("<option value=" + companies[i][0] + ">" + companies[i][1] + "</option>");
+      }
+    });
+
+    $('#company').on('change', function(e){
+      updateDepartments();
+    });
+
+    $('#department').on('change', function(e){
+      updateForms();
+    });
+  });
+</script>
+{% endblock %}
