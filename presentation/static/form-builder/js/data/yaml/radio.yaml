@@ -36,7 +36,8 @@
       label  : Radios Values
       type   : textarea-split
       value  : ["1", "2", "3", "4"]
--  title  : Multiple Checkboxes
+- 
+  title  : Multiple Checkboxes
   fields :
     name:
       label  : Group Name
